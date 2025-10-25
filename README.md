@@ -65,9 +65,6 @@ Protocol Flow (for each concept):
 └─────────────────┘    └─────────────────┘
 ```
 
-## 🚀 Live Demo
-
-**🌐 [Try the Live Demo](https://your-vercel-deployment-url.vercel.app)**
 
 **Test Credentials & Scenarios:**
 - **Password Demo**: `SecurePassword123`
@@ -336,28 +333,12 @@ We welcome contributions! Please follow these steps:
 - Single hardcoded password for demonstration
 - Client-side JavaScript handles sensitive operations
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👥 Authors
 
-- **Atharva Lotankar** - Roll No: 27 - *Lead Developer*
-- **Vaishnavi Avhad** - Roll No: 41 - *Co-Developer*
+- **Atharva Lotankar** - Roll No: 27 - *Developer*
+- **Vaishnavi Avhad** - Roll No: 41 - *Developer*
 
-## 🙏 Acknowledgments
-
-- Computer Networks and Security Course
-- Flask Framework Community
-- Cryptography Research Community
-- Vercel for hosting platform
-
-## 📞 Support
-
-For questions, issues, or contributions:
-- 📧 Email: [your-email@example.com]
-- 🐛 Issues: [GitHub Issues](https://github.com/AtharvaLotankar11/Zero-Knowledge-Proofs_CNS/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/AtharvaLotankar11/Zero-Knowledge-Proofs_CNS/discussions)
 
 ---
 
