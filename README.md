@@ -70,7 +70,13 @@ The system implements a multi-round challenge-response protocol where:
    pip install -r requirements.txt
    ```
 
-3. **Run the application**
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   # Edit .env file with your secret key
+   ```
+
+4. **Run the application**
    ```bash
    python app.py
    ```

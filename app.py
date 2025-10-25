@@ -2,9 +2,14 @@ from flask import Flask, render_template, request, jsonify, session
 import random
 import hashlib
 import secrets
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = secrets.token_hex(16)
+app.secret_key = os.environ.get('SECRET_KEY', secrets.token_hex(16))
 
 # Shared parameters (large prime p, generator g, modulus q = p-1)
 p = 10007  # Larger prime for demo (real-world: 2048-bit)
