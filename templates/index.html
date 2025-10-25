@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZKP Authentication Demo</title>
+    <title>Zero Knowledge Proof Concepts - Interactive Demo</title>
     <style>
       * {
         margin: 0;
@@ -15,88 +15,148 @@
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(
           135deg,
-          #ff9a9e 0%,
-          #fecfef 25%,
-          #fecfef 50%,
-          #a8edea 75%,
-          #fed6e3 100%
+          #667eea 0%,
+          #764ba2 25%,
+          #f093fb 50%,
+          #f5576c 75%,
+          #4facfe 100%
         );
         background-size: 400% 400%;
-        animation: gradientShift 15s ease infinite;
+        animation: gradientShift 20s ease infinite;
         min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         padding: 20px;
       }
 
       @keyframes gradientShift {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
       }
 
       .container {
         background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        border-radius: 25px;
         padding: 40px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        max-width: 800px;
-        width: 100%;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        max-width: 1400px;
+        margin: 0 auto;
+        border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
       .header {
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
       }
 
       .header h1 {
-        background: linear-gradient(
-          135deg,
-          #ff6b6b,
-          #4ecdc4,
-          #45b7d1,
-          #96ceb4,
-          #feca57
-        );
+        background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
         background-size: 300% 300%;
         animation: textGradient 8s ease infinite;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        font-size: 2.5rem;
+        font-size: 3rem;
         font-weight: bold;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
       }
 
       @keyframes textGradient {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
       }
 
       .header p {
-        color: #666;
-        font-size: 1.1rem;
+        color: #555;
+        font-size: 1.2rem;
         line-height: 1.6;
+        margin-bottom: 10px;
       }
 
-      .auth-form {
-        margin-bottom: 30px;
+      .theory-section {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 40px;
+        border-left: 5px solid #667eea;
+      }
+
+      .theory-section h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+      }
+
+      .theory-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .theory-card {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 15px;
+        border-left: 4px solid #4facfe;
+      }
+
+      .theory-card h3 {
+        color: #333;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      .theory-card p {
+        color: #666;
+        line-height: 1.5;
+        font-size: 0.95rem;
+      }
+
+      .demos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .demo-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .demo-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .demo-header {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .demo-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      .demo-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .demo-description {
+        color: #666;
+        font-size: 0.95rem;
+        line-height: 1.5;
       }
 
       .form-group {
@@ -108,56 +168,41 @@
         margin-bottom: 8px;
         font-weight: 600;
         color: #333;
+        font-size: 0.95rem;
       }
 
-      input[type="password"] {
+      input, select {
         width: 100%;
-        padding: 15px;
+        padding: 12px 15px;
         border: 2px solid #e1e5e9;
         border-radius: 10px;
-        font-size: 16px;
+        font-size: 14px;
         transition: all 0.3s ease;
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.9);
       }
 
-      input[type="password"]:focus {
+      input:focus, select:focus {
         outline: none;
-        border: 2px solid transparent;
-        background: linear-gradient(white, white) padding-box,
-          linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1) border-box;
-        box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+        border-color: #667eea;
+        box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
       }
 
       .btn {
-        background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-        background-size: 300% 300%;
-        animation: buttonGradient 6s ease infinite;
+        background: linear-gradient(135deg, #667eea, #764ba2);
         color: white;
         border: none;
-        padding: 15px 30px;
+        padding: 12px 25px;
         border-radius: 10px;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
         width: 100%;
       }
 
-      @keyframes buttonGradient {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
       .btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
       }
 
       .btn:disabled {
@@ -167,20 +212,16 @@
       }
 
       .hint {
-        background: linear-gradient(135deg, #ffeaa7, #fab1a0, #fd79a8);
+        background: linear-gradient(135deg, rgba(245, 87, 108, 0.1), rgba(240, 147, 251, 0.1));
         padding: 15px;
         border-radius: 10px;
         margin-bottom: 20px;
-        border-left: 4px solid #e17055;
-        box-shadow: 0 8px 25px rgba(253, 121, 168, 0.2);
-      }
-
-      .hint strong {
-        color: #2d3436;
+        border-left: 4px solid #f5576c;
+        font-size: 0.9rem;
       }
 
       .results {
-        margin-top: 30px;
+        margin-top: 25px;
         display: none;
       }
 
@@ -190,22 +231,21 @@
         margin-bottom: 20px;
         font-weight: 600;
         text-align: center;
+        font-size: 0.95rem;
       }
 
       .result-success {
-        background: linear-gradient(135deg, #00b894, #00cec9, #55efc4);
+        background: linear-gradient(135deg, #00b894, #00cec9);
         color: white;
-        box-shadow: 0 10px 25px rgba(0, 184, 148, 0.3);
       }
 
       .result-error {
-        background: linear-gradient(135deg, #e17055, #d63031, #fd79a8);
+        background: linear-gradient(135deg, #e17055, #d63031);
         color: white;
-        box-shadow: 0 10px 25px rgba(225, 112, 85, 0.3);
       }
 
       .steps {
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.9);
         border-radius: 10px;
         padding: 20px;
         max-height: 400px;
@@ -213,130 +253,85 @@
       }
 
       .step {
-        margin-bottom: 10px;
-        padding: 10px;
+        margin-bottom: 8px;
+        padding: 8px 12px;
         border-radius: 8px;
         font-family: "Courier New", monospace;
-        font-size: 14px;
+        font-size: 12px;
+        line-height: 1.4;
       }
 
       .step-info {
-        background: linear-gradient(135deg, #74b9ff, #0984e3, #00cec9);
+        background: linear-gradient(135deg, #74b9ff, #0984e3);
         color: white;
-        box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
       }
 
       .step-round {
-        background: linear-gradient(135deg, #a29bfe, #6c5ce7, #fd79a8);
+        background: linear-gradient(135deg, #a29bfe, #6c5ce7);
         color: white;
         font-weight: bold;
         text-align: center;
-        box-shadow: 0 4px 15px rgba(162, 155, 254, 0.3);
       }
 
       .step-step {
-        background: linear-gradient(
-          135deg,
-          rgba(116, 185, 255, 0.1),
-          rgba(0, 206, 201, 0.1)
-        );
+        background: rgba(116, 185, 255, 0.1);
         border-left: 4px solid #74b9ff;
-        box-shadow: 0 2px 10px rgba(116, 185, 255, 0.1);
       }
 
       .step-verification {
-        background: linear-gradient(
-          135deg,
-          rgba(253, 203, 110, 0.1),
-          rgba(255, 107, 107, 0.1)
-        );
+        background: rgba(253, 203, 110, 0.1);
         border-left: 4px solid #fdcb6e;
-        box-shadow: 0 2px 10px rgba(253, 203, 110, 0.2);
       }
 
       .step-success {
-        background: linear-gradient(135deg, #00b894, #00cec9, #55efc4);
+        background: linear-gradient(135deg, #00b894, #00cec9);
         color: white;
         font-weight: bold;
-        box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
       }
 
       .step-error {
-        background: linear-gradient(135deg, #e17055, #d63031, #fd79a8);
+        background: linear-gradient(135deg, #e17055, #d63031);
         color: white;
         font-weight: bold;
-        box-shadow: 0 4px 15px rgba(225, 112, 85, 0.3);
       }
 
       .loading {
         display: none;
         text-align: center;
-        margin-top: 20px;
+        margin-top: 15px;
       }
 
       .spinner {
-        border: 4px solid #f3f3f3;
-        border-top: 4px solid transparent;
-        border-image: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1) 1;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #667eea;
         border-radius: 50%;
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         animation: spin 1s linear infinite;
         margin: 0 auto 10px;
-        position: relative;
-      }
-
-      .spinner::before {
-        content: "";
-        position: absolute;
-        top: -4px;
-        left: -4px;
-        right: -4px;
-        bottom: -4px;
-        border-radius: 50%;
-        border: 4px solid transparent;
-        border-top: 4px solid #ff6b6b;
-        animation: spin 1s linear infinite reverse;
       }
 
       @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
 
       .footer {
-        margin-top: 40px;
-        padding: 20px;
+        margin-top: 50px;
+        padding: 30px;
         text-align: center;
-        background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
-        border-radius: 15px;
-        border-top: 2px solid transparent;
-        background-clip: padding-box;
-        position: relative;
-      }
-
-      .footer::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-        border-radius: 15px 15px 0 0;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
+        border-radius: 20px;
+        border-top: 3px solid #667eea;
       }
 
       .footer h3 {
-        background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1);
+        background: linear-gradient(135deg, #667eea, #764ba2);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        font-size: 1.2rem;
-        margin-bottom: 15px;
+        font-size: 1.4rem;
+        margin-bottom: 20px;
         font-weight: 600;
       }
 
@@ -348,24 +343,23 @@
       }
 
       .credit-card {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-        padding: 15px 20px;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.3);
         transition: all 0.3s ease;
-        backdrop-filter: blur(5px);
       }
 
       .credit-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 12px 25px rgba(255, 107, 107, 0.2);
+        box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
       }
 
       .credit-name {
         font-weight: 700;
         font-size: 1.1rem;
-        background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        background: linear-gradient(135deg, #667eea, #764ba2);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -378,65 +372,180 @@
         font-weight: 500;
       }
 
-      @media (max-width: 600px) {
-        .container {
-          padding: 20px;
-        }
-
-        .header h1 {
-          font-size: 2rem;
-        }
-
-        .credits {
-          flex-direction: column;
-          gap: 15px;
-        }
-
-        .credit-card {
-          margin: 0 auto;
-          max-width: 250px;
-        }
+      @media (max-width: 768px) {
+        .container { padding: 20px; }
+        .header h1 { font-size: 2.2rem; }
+        .demos-grid { grid-template-columns: 1fr; }
+        .theory-grid { grid-template-columns: 1fr; }
+        .credits { flex-direction: column; gap: 15px; }
       }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <h1>🔐 ZKP Authentication</h1>
-        <p>Zero-Knowledge Proof Password Authentication Demo</p>
-        <p>Prove you know the password without revealing it!</p>
+        <h1>🔐 Zero Knowledge Proof Concepts</h1>
+        <p>Interactive demonstrations of cryptographic protocols that prove knowledge without revealing secrets</p>
+        <p>Explore the mathematical beauty of privacy-preserving authentication</p>
       </div>
 
-      <div class="hint">
-        <strong>💡 Hint:</strong> The correct password is
-        <code>SecurePassword123</code>. Try entering a wrong password first to
-        see how the system detects invalid proofs!
-      </div>
-
-      <form class="auth-form" id="authForm">
-        <div class="form-group">
-          <label for="password">Enter Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your password..."
-            required
-          />
+      <div class="theory-section">
+        <h2>🧠 Understanding Zero Knowledge Proofs</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h3>🎯 Completeness</h3>
+            <p>If the statement is true and both parties follow the protocol, the verifier will always accept the proof.</p>
+          </div>
+          <div class="theory-card">
+            <h3>🛡️ Soundness</h3>
+            <p>If the statement is false, no cheating prover can convince the verifier except with negligible probability.</p>
+          </div>
+          <div class="theory-card">
+            <h3>🔒 Zero Knowledge</h3>
+            <p>The verifier learns nothing about the secret beyond the fact that the statement is true.</p>
+          </div>
+          <div class="theory-card">
+            <h3>🔢 Mathematical Foundation</h3>
+            <p>Based on discrete logarithm problem in finite fields using modular arithmetic and cryptographic commitments.</p>
+          </div>
         </div>
-        <button type="submit" class="btn" id="submitBtn">
-          🚀 Authenticate with ZKP
-        </button>
-      </form>
-
-      <div class="loading" id="loading">
-        <div class="spinner"></div>
-        <p>Running Zero-Knowledge Proof verification...</p>
+        <p style="color: #666; font-style: italic; text-align: center;">
+          Each demo below implements these principles using the Schnorr protocol and commitment schemes over finite fields.
+        </p>
       </div>
 
-      <div class="results" id="results">
-        <div class="result-header" id="resultHeader"></div>
-        <div class="steps" id="steps"></div>
+      <div class="demos-grid">
+        <!-- Password Authentication Demo -->
+        <div class="demo-card">
+          <div class="demo-header">
+            <span class="demo-icon">🔑</span>
+            <div class="demo-title">Password Authentication</div>
+            <div class="demo-description">Prove you know a password without transmitting it over the network</div>
+          </div>
+          
+          <div class="hint">
+            <strong>💡 Try:</strong> Password is <code>SecurePassword123</code>. Test with wrong password first!
+          </div>
+          
+          <form class="demo-form" data-demo="password">
+            <div class="form-group">
+              <label for="password">Enter Password:</label>
+              <input type="password" name="password" placeholder="Enter your password..." required />
+            </div>
+            <button type="submit" class="btn">🚀 Authenticate with ZKP</button>
+          </form>
+          
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Running Schnorr protocol...</p>
+          </div>
+          
+          <div class="results">
+            <div class="result-header"></div>
+            <div class="steps"></div>
+          </div>
+        </div>
+
+        <!-- Age Verification Demo -->
+        <div class="demo-card">
+          <div class="demo-header">
+            <span class="demo-icon">🎂</span>
+            <div class="demo-title">Age Verification</div>
+            <div class="demo-description">Prove you're over 18 without revealing your exact age</div>
+          </div>
+          
+          <div class="hint">
+            <strong>💡 Try:</strong> Enter birth year 2000 or earlier to pass verification
+          </div>
+          
+          <form class="demo-form" data-demo="age">
+            <div class="form-group">
+              <label for="birth_year">Birth Year:</label>
+              <input type="number" name="birth_year" min="1900" max="2024" placeholder="e.g., 1995" required />
+            </div>
+            <button type="submit" class="btn">🎯 Verify Age with ZKP</button>
+          </form>
+          
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Running age range proof...</p>
+          </div>
+          
+          <div class="results">
+            <div class="result-header"></div>
+            <div class="steps"></div>
+          </div>
+        </div>
+
+        <!-- Range Proof Demo -->
+        <div class="demo-card">
+          <div class="demo-header">
+            <span class="demo-icon">📊</span>
+            <div class="demo-title">Range Proof</div>
+            <div class="demo-description">Prove a number is within [1000, 5000] without revealing the exact value</div>
+          </div>
+          
+          <div class="hint">
+            <strong>💡 Try:</strong> Secret number is <code>3500</code>. Test other values to see failures!
+          </div>
+          
+          <form class="demo-form" data-demo="range">
+            <div class="form-group">
+              <label for="number">Enter Number (1000-5000):</label>
+              <input type="number" name="number" min="1" max="10000" placeholder="e.g., 3500" required />
+            </div>
+            <button type="submit" class="btn">📈 Prove Range with ZKP</button>
+          </form>
+          
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Running range proof protocol...</p>
+          </div>
+          
+          <div class="results">
+            <div class="result-header"></div>
+            <div class="steps"></div>
+          </div>
+        </div>
+
+        <!-- Membership Proof Demo -->
+        <div class="demo-card">
+          <div class="demo-header">
+            <span class="demo-icon">👥</span>
+            <div class="demo-title">Group Membership</div>
+            <div class="demo-description">Prove you belong to a group without revealing which member you are</div>
+          </div>
+          
+          <div class="hint">
+            <strong>💡 Try:</strong> Valid members: Alice, Bob, Charlie, Diana, Eve. Secret member is <code>Charlie</code>
+          </div>
+          
+          <form class="demo-form" data-demo="membership">
+            <div class="form-group">
+              <label for="member">Select Group Member:</label>
+              <select name="member" required>
+                <option value="">Choose a member...</option>
+                <option value="Alice">Alice</option>
+                <option value="Bob">Bob</option>
+                <option value="Charlie">Charlie</option>
+                <option value="Diana">Diana</option>
+                <option value="Eve">Eve</option>
+                <option value="Frank">Frank (not in group)</option>
+              </select>
+            </div>
+            <button type="submit" class="btn">👤 Prove Membership with ZKP</button>
+          </form>
+          
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Running membership proof...</p>
+          </div>
+          
+          <div class="results">
+            <div class="result-header"></div>
+            <div class="steps"></div>
+          </div>
+        </div>
       </div>
 
       <div class="footer">
@@ -455,61 +564,64 @@
     </div>
 
     <script>
-      document
-        .getElementById("authForm")
-        .addEventListener("submit", async function (e) {
+      // Handle all demo forms
+      document.querySelectorAll('.demo-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
           e.preventDefault();
-
-          const password = document.getElementById("password").value;
-          const submitBtn = document.getElementById("submitBtn");
-          const loading = document.getElementById("loading");
-          const results = document.getElementById("results");
-
+          
+          const demoType = this.dataset.demo;
+          const formData = new FormData(this);
+          const data = Object.fromEntries(formData.entries());
+          
+          const submitBtn = this.querySelector('.btn');
+          const loading = this.parentElement.querySelector('.loading');
+          const results = this.parentElement.querySelector('.results');
+          
           // Show loading state
           submitBtn.disabled = true;
-          loading.style.display = "block";
-          results.style.display = "none";
-
+          loading.style.display = 'block';
+          results.style.display = 'none';
+          
           try {
-            const response = await fetch("/authenticate", {
-              method: "POST",
+            const response = await fetch(`/zkp/${demoType}`, {
+              method: 'POST',
               headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ password: password }),
+              body: JSON.stringify(data)
             });
-
-            const data = await response.json();
-
+            
+            const result = await response.json();
+            
             // Hide loading
-            loading.style.display = "none";
-
+            loading.style.display = 'none';
+            
             // Show results
-            const resultHeader = document.getElementById("resultHeader");
-            const steps = document.getElementById("steps");
-
-            resultHeader.textContent = data.message;
-            resultHeader.className =
-              "result-header " +
-              (data.success ? "result-success" : "result-error");
-
+            const resultHeader = results.querySelector('.result-header');
+            const steps = results.querySelector('.steps');
+            
+            resultHeader.textContent = result.message;
+            resultHeader.className = 'result-header ' + (result.success ? 'result-success' : 'result-error');
+            
             // Display steps
-            steps.innerHTML = "";
-            data.steps.forEach((step) => {
-              const stepDiv = document.createElement("div");
+            steps.innerHTML = '';
+            result.steps.forEach(step => {
+              const stepDiv = document.createElement('div');
               stepDiv.className = `step step-${step.type}`;
               stepDiv.textContent = step.message;
               steps.appendChild(stepDiv);
             });
-
-            results.style.display = "block";
+            
+            results.style.display = 'block';
+            
           } catch (error) {
-            loading.style.display = "none";
-            alert("An error occurred during authentication: " + error.message);
+            loading.style.display = 'none';
+            alert('An error occurred: ' + error.message);
           } finally {
             submitBtn.disabled = false;
           }
         });
+      });
     </script>
   </body>
 </html>
